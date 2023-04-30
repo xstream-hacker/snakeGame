@@ -24,19 +24,15 @@ const updateFoodPosition = () => {
 
 const handleGameOver = () => {
     song.play();
-    const gameEnd = setTimeout(end, 2000);
+    const myTimeout = setTimeout(myGreeting, 2000);
 
+function myGreeting() {
 
-function end() {
+  alert("Game Over Please Restart");
 
+  location.reload();
 
-
-  // Clearing the timer and reloading the page on game over
-    clearInterval(setIntervalId);
-    alert("Game Over! Press OK to replay...");
-    clearTimeout(gameEnd);
-    location.reload();
-
+}
 }
     
 
@@ -44,7 +40,7 @@ function end() {
 
 
 
-}
+
 
 const changeDirection = e => {
     // Changing velocity value based on key press
