@@ -10,6 +10,7 @@ let velocityX = 0, velocityY = 0;
 let snakeBody = [];
 let setIntervalId;
 let score = 0;
+let eat = 
 
 // Getting high score from the local storage
 let highScore = localStorage.getItem("high-score") || 0;
@@ -57,6 +58,8 @@ const initGame = () => {
         updateFoodPosition();
         snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
         score++; // increment score by 1
+let audio = new Audio('eat.mp3');
+audio.play();
         highScore = score >= highScore ? score : highScore;
         localStorage.setItem("high-score", highScore);
         scoreElement.innerText = `Score: ${score}`;
