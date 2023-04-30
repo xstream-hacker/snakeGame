@@ -23,6 +23,9 @@ const updateFoodPosition = () => {
 }
 
 const handleGameOver = () => {
+    let end = new Audio('end.mp3');
+
+     end.play();
     // Clearing the timer and reloading the page on game over
     clearInterval(setIntervalId);
     alert("Game Over! Press OK to replay...");
