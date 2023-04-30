@@ -27,6 +27,7 @@ const handleGameOver = () => {
     const myTimeout = setTimeout(myGreeting, 2000);
 
 function myGreeting() {
+    clearInterval(setItervalId);
 
   alert("Game Over Please Restart");
 
