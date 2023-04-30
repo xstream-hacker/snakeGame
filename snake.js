@@ -10,7 +10,7 @@ let velocityX = 0, velocityY = 0;
 let snakeBody = [];
 let setIntervalId;
 let score = 0;
-
+var song = new Audio('end.mp3');
 
 // Getting high score from the local storage
 let highScore = localStorage.getItem("high-score") || 0;
@@ -23,9 +23,11 @@ const updateFoodPosition = () => {
 }
 
 const handleGameOver = () => {
-    let end = new Audio('end.mp3');
+    
+       song.play();
+    
 
-     end.play();
+
     // Clearing the timer and reloading the page on game over
     clearInterval(setIntervalId);
     alert("Game Over! Press OK to replay...");
