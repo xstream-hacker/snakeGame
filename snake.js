@@ -23,15 +23,25 @@ const updateFoodPosition = () => {
 }
 
 const handleGameOver = () => {
-    
-       song.play();
-    
+    const gameEnd = setTimeout(end, 2000);
+    song.play();
+
+function end() {
 
 
-    // Clearing the timer and reloading the page on game over
+
+  // Clearing the timer and reloading the page on game over
     clearInterval(setIntervalId);
     alert("Game Over! Press OK to replay...");
     location.reload();
+
+}
+    
+
+    
+
+
+
 }
 
 const changeDirection = e => {
