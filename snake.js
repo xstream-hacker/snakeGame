@@ -58,8 +58,8 @@ const initGame = () => {
         updateFoodPosition();
         snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
         score++; // increment score by 1
-let audio = new Audio('eat.mp3');
-audio.play();
+     let audio = new Audio('eat.mp3');
+     audio.play();
         highScore = score >= highScore ? score : highScore;
         localStorage.setItem("high-score", highScore);
         scoreElement.innerText = `Score: ${score}`;
