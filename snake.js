@@ -10,7 +10,7 @@ let velocityX = 0, velocityY = 0;
 let snakeBody = [];
 let setIntervalId;
 let score = 0;
-let eat = 
+
 
 // Getting high score from the local storage
 let highScore = localStorage.getItem("high-score") || 0;
