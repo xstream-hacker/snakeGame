@@ -7,13 +7,27 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
-  body{
+  .main{
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: #E3F2FD;
+    flex-direction: column;
+    position: relative;
   }
+  .main p{
+    position: absolute;
+    color: #fff;
+    z-index: 2;
+    opacity: 0.1;
+  }
+  .game-name h2{
+    margin: 10px;
+    color:#673AB7;
+    font-weight: 600;
+  }
+  
 
   .wrapper{
     width: 65vmin;
@@ -22,6 +36,7 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .game-details{
     color: #fff;
@@ -30,6 +45,14 @@
     padding: 20px 27px;
     display: flex;
     justify-content: space-between;
+  }
+  .player-name{
+    color: #fff;
+    margin: 10px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+
   }
   .play-board{
     width: 100%;
@@ -68,7 +91,9 @@
   .wrapper {
     width: 90vmin;
     height: 115vmin;
+
   }
+  
   .game-details {
     font-size: 1rem;
     padding: 15px 27px;
@@ -78,6 +103,11 @@
   }
   .controls i {
     padding: 15px 0;
-    font-size: 1rem;
+    font-size: 0rem;
   }
 }
+  footer h4{
+    color: #0051ff;
+    font-weight: 600;
+    margin: 10px;
+  }
