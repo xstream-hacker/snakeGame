@@ -2,6 +2,8 @@ const playBoard = document.querySelector(".play-board");
 const scoreElement = document.querySelector(".score");
 const highScoreElement = document.querySelector(".high-score");
 const controls = document.querySelectorAll(".controls i");
+const palyerNameElement = document.querySelector(".name");
+const startMsg = document.querySelector("#msg");
 
 let gameOver = false;
 let foodX, foodY;
@@ -10,7 +12,28 @@ let velocityX = 0, velocityY = 0;
 let snakeBody = [];
 let setIntervalId;
 let score = 0;
-var song = new Audio('end.mp3');
+let eatSong = new Audio ("eat.mp3");
+let endSong = new Audio ("end.mp3");
+let gameSong = new Audio ("gamesong.mp3");
+// validating player name
+var name = localStorage.getItem("player-name");
+console.log(name.length);
+
+validation();   
+function validation(){
+    if (name === "null" || name === '' || name === " " ) {
+        name = prompt("Please Enter Your Name:");
+        name.trim();
+        localStorage.setItem("player-name",name);
+        palyerNameElement.innerText = `Name: ${name}`;
+
+        validation();
+
+    }else {
+    palyerNameElement.innerText = `Name: ${name}`;
+        
+    }
+}
 
 // Getting high score from the local storage
 let highScore = localStorage.getItem("high-score") || 0;
@@ -23,48 +46,56 @@ const updateFoodPosition = () => {
 }
 
 const handleGameOver = () => {
-    clearInterval(setItervalId);
-    song.play();
-    const myTimeout = setTimeout(myGreeting, 2000);
-
-function myGreeting() {
+    // Clearing the timer and reloading the page on game over
+    clearInterval(setIntervalId);
+    gameSong.pause();
+    endSong.play();
+    document.removeEventListener("keyup",changeDirection);
+    setTimeout(gameEnd,225);
+    function gameEnd() {
+        alert("Game Over Press Ok to restart");
+        location.reload();
+    }
     
-
-  alert("Game Over Please Restart");
-
-  location.reload();
-
 }
-}
-    
-
-    
-
-
-
-
 
 const changeDirection = e => {
+    
+    
     // Changing velocity value based on key press
-    if(e.key === "ArrowUp" && velocityY != 1) {
-        velocityX = 0;
-        velocityY = -1;
-    } else if(e.key === "ArrowDown" && velocityY != -1) {
-        velocityX = 0;
-        velocityY = 1;
-    } else if(e.key === "ArrowLeft" && velocityX != 1) {
-        velocityX = -1;
-        velocityY = 0;
-    } else if(e.key === "ArrowRight" && velocityX != -1) {
-        velocityX = 1;
-        velocityY = 0;
-    }
+    
+    console.log(e);
+        if(e.key === "ArrowUp" && velocityY != 1) {
+            startMsg.style.display="none";
+            velocityX = 0;
+            velocityY = -1;
+            gameSong.play();
+        } else if(e.key === "ArrowDown" && velocityY != -1) {
+            startMsg.style.display="none";
+            velocityX = 0;
+            velocityY = 1;
+            gameSong.play();
+        } else if(e.key === "ArrowLeft" && velocityX != 1) {
+            startMsg.style.display="none";
+            velocityX = -1;
+            velocityY = 0;
+            gameSong.play();
+        } else if(e.key === "ArrowRight" && velocityX != -1) {
+            startMsg.style.display="none";
+            velocityX = 1;
+            velocityY = 0;
+            gameSong.play();
+        }
 }
+
+
 
 // Calling changeDirection on each key click and passing key dataset value as an object
 controls.forEach(button => button.addEventListener("click", () => changeDirection({ key: button.dataset.key })));
 
 const initGame = () => {
+
+
     if(gameOver) return handleGameOver();
     let html = `<div class="food" style="grid-area: ${foodY} / ${foodX}"></div>`;
 
@@ -73,8 +104,7 @@ const initGame = () => {
         updateFoodPosition();
         snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
         score++; // increment score by 1
-     let audio = new Audio('eating.mp3');
-     audio.play();
+        eatSong.play(); //play song
         highScore = score >= highScore ? score : highScore;
         localStorage.setItem("high-score", highScore);
         scoreElement.innerText = `Score: ${score}`;
@@ -93,6 +123,7 @@ const initGame = () => {
     // Checking if the snake's head is out of wall, if so setting gameOver to true
     if(snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30) {
         return gameOver = true;
+
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
