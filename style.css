@@ -22,10 +22,9 @@
     z-index: 2;
     opacity: 0.1;
   }
-  .game-name h2{
+  .game-name h1{
     margin: 10px;
     color:#673AB7;
-    font-weight: 600;
   }
   
 
